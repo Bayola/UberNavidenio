@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash_bg"
-    tools:context=".SplashScreenMain">
+    tools:context=".ui.SplashScreenMain">
 
     <Button
         android:id="@+id/id_sign_in"
@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="76dp"
         android:background="@drawable/green_button"
-        android:text="@string/sign_in"
+        android:text="@string/txt_sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.065"
@@ -29,7 +29,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="76dp"
         android:background="@drawable/white_button"
-        android:text="@string/sign_up"
+        android:text="@string/txt_sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.888"

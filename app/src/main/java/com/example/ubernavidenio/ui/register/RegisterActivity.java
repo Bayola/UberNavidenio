@@ -27,10 +27,23 @@ import android.widget.Toast;
 
 import com.example.ubernavidenio.R;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private RegisterViewModel registerViewModel;
+    EditText usernameEditText, nameEditText, lastNameEditText, phoneNumberEditText,
+    passwordEditText, passwordCheckerEditText;
+    Button btnAceptar;
+    BigInteger valorMd5 = null;
+    ArrayList<String> lista;
+
+    public static final String REGEX_NUMEROS = "^[0-9]+$";
+
+    public static final String REGEX_EMAIL ="^[a-zA-Z0-9\\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,28 +51,44 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         registerViewModel = ViewModelProviders.of(this, new RegisterViewModelFactory())
                 .get(RegisterViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
+        this.usernameEditText = findViewById(R.id.username);
+        this.nameEditText = findViewById(R.id.name);
+        this.lastNameEditText = findViewById(R.id.last_name);
+        this.phoneNumberEditText = findViewById(R.id.phone_number);
+        this.passwordEditText = findViewById(R.id.password);
+        this.passwordCheckerEditText = findViewById(R.id.password_checker);
+        final Button nextButton = findViewById(R.id.btn_next);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
-        registerViewModel.getLoginFormState().observe(this, new Observer<RegisterFormState>() {
+        registerViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
             @Override
             public void onChanged(@Nullable RegisterFormState registerFormState) {
                 if (registerFormState == null) {
                     return;
                 }
-                loginButton.setEnabled(registerFormState.isDataValid());
+                nextButton.setEnabled(registerFormState.isDataValid());
                 if (registerFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(registerFormState.getUsernameError()));
+                }
+                if (registerFormState.getNameError() != null){
+                    nameEditText.setError(getString(registerFormState.getNameError()));
+                }
+                if (registerFormState.getLastNameError() != null){
+                    lastNameEditText.setError(getString(registerFormState.getLastNameError()));
+                }
+                if (registerFormState.getPhoneNumberError() != null){
+                    phoneNumberEditText.setError(getString(registerFormState.getPhoneNumberError()));
                 }
                 if (registerFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(registerFormState.getPasswordError()));
                 }
+                if (registerFormState.getPasswordCheckerError() != null){
+                    passwordCheckerEditText.setError(getString(registerFormState.getPasswordCheckerError()));
+                }
             }
         });
 
-        registerViewModel.getLoginResult().observe(this, new Observer<RegisterResult>() {
+        registerViewModel.getRegisterResult().observe(this, new Observer<RegisterResult>() {
             @Override
             public void onChanged(@Nullable RegisterResult registerResult) {
                 if (registerResult == null) {
@@ -93,29 +122,36 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void afterTextChanged(Editable s) {
                 registerViewModel.registerDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                        nameEditText.getText().toString(), lastNameEditText.getText().toString(),
+                        phoneNumberEditText.getText().toString(), passwordEditText.getText().toString(),
+                        passwordCheckerEditText.getText().toString());
             }
         };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
+
+        createEditTextListeners(afterTextChangedListener);
+
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     registerViewModel.register(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                            nameEditText.getText().toString(), lastNameEditText.getText().toString(),
+                            phoneNumberEditText.getText().toString(), passwordEditText.getText().toString(),
+                            passwordCheckerEditText.getText().toString());
                 }
                 return false;
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 registerViewModel.register(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                        nameEditText.getText().toString(),
+                        lastNameEditText.getText().toString(), phoneNumberEditText.getText().toString(),
+                        passwordEditText.getText().toString(), passwordCheckerEditText.getText().toString());
             }
         });
         // Spinner element
@@ -158,5 +194,48 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void createEditTextListeners(TextWatcher afterTextChangedListener){
+        this.usernameEditText.addTextChangedListener(afterTextChangedListener);
+        this.nameEditText.addTextChangedListener(afterTextChangedListener);
+        this.lastNameEditText.addTextChangedListener(afterTextChangedListener);
+        this.phoneNumberEditText.addTextChangedListener(afterTextChangedListener);
+        this.passwordEditText.addTextChangedListener(afterTextChangedListener);
+        this.passwordCheckerEditText.addTextChangedListener(afterTextChangedListener);
+    }
+    public static boolean validateCI(String Cedula)//Metodo que permitira verificar si una cedula es correcta.
+    {
+        if(Cedula.length() != 10){
+            return false;
+        }
+        boolean lastDigit=false;
+        int sumaDigImpares=0;
+        int sumaDigPares=0;
+        int digImpar=0;
+        int digPar=0;
+        int digVerif = Integer.parseInt(Cedula.substring(9));
+        int decProx=0;
+
+        for(int i=0;i<8;i+=2){
+            digPar=(Integer.parseInt(Cedula.substring(i+1, i+2)));
+            sumaDigPares+=digPar;
+        }
+
+        for(int i=-1;i<8;i+=2){
+            digImpar=(Integer.parseInt(Cedula.substring(i+1,i+2)))*2;
+            if(digImpar>9){
+                digImpar%=9;
+            }
+            sumaDigImpares+=digImpar;
+        }
+
+        decProx=(((((sumaDigImpares+sumaDigPares)/10))*10)+10)-(sumaDigImpares + sumaDigPares);
+
+        if(decProx==digVerif)
+        {
+            return true;
+        }
+        return false;
     }
 }
