@@ -15,6 +15,22 @@ public class RegisterFormState {
     private Integer phoneNumberError;
     @Nullable
     private Integer passwordCheckerError;
+    @Nullable
+    private Integer identityCardError;
+    @Nullable
+    private Integer birthDateError;
+    @Nullable
+    private Integer cardNumberError;
+    @Nullable
+    private Integer CVVError;
+    @Nullable
+    private Integer SectorError;
+    @Nullable
+    private Integer StreetError;
+    @Nullable
+    private Integer storeNameError;
+    @Nullable
+    private Integer verificationCodeError;
 
     private boolean isDataValid;
 
@@ -31,6 +47,22 @@ public class RegisterFormState {
             this.passwordError = value;
         } else if (attributeName.equals("passwordChecker")){
             this.passwordCheckerError = value;
+        } else if (attributeName.equals("identityCard")){
+            this.identityCardError = value;
+        } else if (attributeName.equals("birthDate")){
+            this.birthDateError = value;
+        } else if (attributeName.equals("cardNumber")){
+            this.cardNumberError = value;
+        } else if (attributeName.equals("CVV")){
+            this.CVVError = value;
+        } else if (attributeName.equals("sector")){
+            this.SectorError = value;
+        } else if (attributeName.equals("street")){
+            this.StreetError = value;
+        } else if (attributeName.equals("storeName")){
+            this.storeNameError = value;
+        } else if (attributeName.equals("verifyCode")){
+            this.verificationCodeError = value;
         }
         this.isDataValid = false;
     }
@@ -42,6 +74,13 @@ public class RegisterFormState {
         this.phoneNumberError = null;
         this.passwordError = null;
         this.passwordCheckerError = null;
+        this.identityCardError = null;
+        this.birthDateError = null;
+        this.cardNumberError = null;
+        this.CVVError = null;
+        this.SectorError = null;
+        this.StreetError = null;
+        this.storeNameError = null;
         this.isDataValid = isDataValid;
     }
 
@@ -74,10 +113,42 @@ public class RegisterFormState {
     Integer getPasswordCheckerError(){
         return passwordCheckerError;
     }
-
+    @Nullable
+    Integer getIdentityCardError(){
+        return identityCardError;
+    }
+    @Nullable
+    Integer getBirthDateError(){
+        return birthDateError;
+    }
+    @Nullable
+    Integer getCardNumberError(){
+        return cardNumberError;
+    }
+    @Nullable
+    Integer getCVVError(){
+        return CVVError;
+    }
+    @Nullable
+    Integer getSectorError(){
+        return SectorError;
+    }
+    @Nullable
+    Integer getStreetError(){
+        return StreetError;
+    }
+    @Nullable
+    Integer getStoreNameError(){
+        return storeNameError;
+    }
+    @Nullable
+    Integer getVerificationCodeError(){
+        return verificationCodeError;
+    }
     boolean isDataValid() {
         return isDataValid;
     }
+
 
 
 }

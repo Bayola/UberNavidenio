@@ -13,6 +13,13 @@
     <string name="invalid_last_name">Apellido no válido</string>
     <string name="invalid_phone_numer">Número de teléfono no válido</string>
     <string name="invalid_password_checker">Los password no coinciden</string>
+    <string name="invalid_identity_card">Cedula de identidad no válida</string>
+    <string name="invalid_birth_date">El usuario debe ser mayor de edad</string>
+    <string name="invalid_card_number">Tarjeta de crédito o débito no válida</string>
+    <string name="invalid_CVV">Código de seguridad no válido</string>
+    <string name="invalid_sector">Sector no válido</string>
+    <string name="invalid_street">Calle no válida</string>
+    <string name="invalid_store_name">Tienda no válida</string>
     <string name="login_failed">"Inicio de sesión fallido"</string>
     <string name="txt_sign_in">"Iniciar sesión"</string>
     <string name="txt_sign_up">"Registrarse"</string>
@@ -21,11 +28,72 @@
     <string name="txt_nombres">Nombre</string>
     <string name="txt_apellidos">Apellido</string>
     <string name="txt_num_telefono">Número de teléfono</string>
+    <string name="txt_cod_confirmacion">Código de verificación</string>
+    <string name="txt_num_cedula">Número de cédula</string>
+    <string name="txt_num_tarjeta">Número de Tarjeta</string>
+    <string name="txt_date_birthday">Fecha de nacimiento</string>
+    <string name="txt_transport_type">Tipo de transporte:</string>
+    <string name="txt_number_locations">Número de establecimientos:</string>
+    <string name="txt_sector">Sector</string>
+    <string name="txt_calle">Calle</string>
+    <string name="txt_month">Mes</string>
+    <string name="txt_year">Año</string>
+    <string name="txt_CVV">CVV</string>
+    <string name="txt_nombre_establecimiento">Nombre del establecimiento</string>
+    <string name="txt_Titulo_verificacion_telefono">Verificar número de teléfono</string>
+    <string name="txt_Titulo_verificacion_codigo_admin">Verificar código administración</string>
+    <string name="txt_Titulo_registrar_cliente">Registrar cliente</string>
+    <string name="txt_Titulo_registrar_repartidor">Registrar repartidor</string>
+    <string name="txt_Titulo_registrar_establecimiento">Registrar establecimiento</string>
+    <string name="txt_Titulo_registro">Registro</string>
+    <string name="txt_btn_verify">Enviar código</string>
+    <string name="txt_cod_verify">Verificar código</string>
     <string name="txt_next_page">Siguiente</string>
     <string-array name="TipoUsuario">
         <item>Cliente</item>
         <item>Repartidor</item>
         <item>Establecimiento</item>
         <item>Administrador</item>
+    </string-array>
+    <string-array name="TipoTransporte">
+        <item>Automóvil</item>
+        <item>Motocicleta</item>
+        <item>Bicicleta</item>
+    </string-array>
+    <string-array name="NumeroLocaciones">
+        <item>1</item>
+        <item>2-5</item>
+        <item>6-10</item>
+        <item>11-25</item>
+        <item>25+</item>
+    </string-array>
+    <string-array name="Meses">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="Años">
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+        <item>2031</item>
+        <item>2032</item>
     </string-array>
 </resources>
